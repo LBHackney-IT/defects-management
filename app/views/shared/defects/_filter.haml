@@ -1,0 +1,23 @@
+%h3.govuk-heading-s
+  Filter by:
+  %span
+    = link_to('Clear filters','', class: 'govuk-link govuk-link--no-visited-state lbh-right')
+.govuk-form-group.filter-defects
+  %fieldset.govuk-fieldset
+    %legend.govuk-fieldset__legend.govuk-fieldset__legend--s.lbh-fieldset__legend
+      %h1.govuk-fieldset__heading Status
+    .govuk-checkboxes.govuk-checkboxes--small.lbh-checkboxes
+      .govuk-checkboxes__item
+        %input.govuk-checkboxes__input{name: "status", type: 'checkbox', value: "outstanding", id: 'outstanding'}/
+        %label.govuk-label.govuk-checkboxes__label{for: "outstanding"}
+          Outstanding
+
+.govuk-form-group.filter-defects
+  %fieldset.govuk-fieldset
+    %legend.govuk-fieldset__legend.govuk-fieldset__legend--s.lbh-fieldset__legend
+      %h1.govuk-fieldset__heading Trade
+    .govuk-checkboxes.govuk-checkboxes--small.lbh-checkboxes
+      .govuk-checkboxes__item
+        %input.govuk-checkboxes__input{name: "trade", type: 'checkbox', value: "woodwork", id: 'woodwork'}/
+        %label.govuk-label.govuk-checkboxes__label{for: "outstanding"}
+          Woodwork

@@ -54,7 +54,7 @@ p {
   border-right: 1px solid lighten($lbh-border-colour, 15%);
   border-top: 1px solid lighten($lbh-border-colour, 15%);
   border-left: 1px solid lighten($lbh-border-colour, 15%);
-  background-color: lighten($lbh-border-colour, 20%);;
+  background-color: lighten($lbh-border-colour, 20%);
   padding: 0.5em;
 }
 
@@ -64,10 +64,24 @@ p {
     border-right: 1px solid lighten($lbh-border-colour, 15%);
     border-top: 1px solid lighten($lbh-border-colour, 15%);
     border-left: 1px solid lighten($lbh-border-colour, 15%);
-    background-color: lighten($lbh-border-colour, 20%);;
+    background-color: lighten($lbh-border-colour, 20%);
     padding: 0.5em;
     padding-left: 1em;
     margin-left: -1em;
     margin-right: -1em;
   }
+}
+
+.filter-defects {
+  border: 5px solid $lbh-panel-light;
+  padding: 0.5em;
+
+  .lbh-checkboxes {
+    border-top: 1px solid $lbh-panel-light;
+    background-color: #fff;
+  }
+}
+
+.lbh-right {
+  float: right;
 }
