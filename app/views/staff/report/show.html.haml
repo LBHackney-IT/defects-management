@@ -1,0 +1,95 @@
+- content_for :page_title_prefix, I18n.t('page_title.staff.reports.scheme.show', name: @presenter.scheme.name)
+
+.govuk-breadcrumbs
+  %ol.govuk-breadcrumbs__list
+    = breadcrumb_link_to('Home', root_path)
+
+.govuk-grid-row
+  .govuk-grid-column-full
+    %h1.govuk-heading-l
+      = I18n.t('page_title.staff.reports.scheme.show', name: @presenter.scheme.name)
+      %span.govuk-caption-l= @presenter.scheme.contractor_name
+      %span.govuk-caption-l= "From #{@presenter.scheme.created_at.to_s} to #{Time.current.to_s}"
+
+    %h1.govuk-heading-m.section-heading Summary
+    %table.govuk-table.scheme-reports
+      %thead.govuk-table__head
+        %tr.govuk-table__row
+          %th.govuk-table__header
+            Title
+          %th.govuk-table__header
+            Property
+          %th.govuk-table__header
+            Communal
+          %th.govuk-table__header
+            Total
+      %tbody.govuk-table__body
+        %tr.govuk-table__row
+          %td.govuk-table__cell= 'Total defects'
+          %td.govuk-table__cell= @presenter.defects.property.count
+          %td.govuk-table__cell= @presenter.defects.communal.count
+          %td.govuk-table__cell= @presenter.defects.count
+
+    %h1.govuk-heading-m.section-heading Status
+    %table.govuk-table.scheme-reports
+      %thead.govuk-table__head
+        %tr.govuk-table__row
+          %th.govuk-table__header
+            Name
+          %th.govuk-table__header
+            Property
+          %th.govuk-table__header
+            Communal
+          %th.govuk-table__header
+            Total
+
+      %tbody.govuk-table__body
+        - Defect.statuses.each do |text, integer|
+          %tr.govuk-table__row
+            %td.govuk-table__cell= text
+            %td.govuk-table__cell= @presenter.defects_for(status: text).outstanding.property.count
+            %td.govuk-table__cell= @presenter.defects_for(status: text).outstanding.communal.count
+            %td.govuk-table__cell= @presenter.defects_for(status: text).count
+
+    %h1.govuk-heading-m.section-heading Trades
+    %table.govuk-table.scheme-reports
+      %thead.govuk-table__head
+        %tr.govuk-table__row
+          %th.govuk-table__header
+            Name
+          %th.govuk-table__header
+            Percentage
+          %th.govuk-table__header
+            Total
+      %tbody.govuk-table__body
+        - Defect::TRADES.each do |trade|
+          %tr.govuk-table__row
+            %td.govuk-table__cell= trade
+            %td.govuk-table__cell= @presenter.trade_percentage(trade: trade)
+            %td.govuk-table__cell= @presenter.trade_count_for(trade: trade)
+
+    %h1.govuk-heading-m.section-heading Priorities
+    %table.govuk-table.scheme-reports
+      %thead.govuk-table__head
+        %tr.govuk-table__row
+          %th.govuk-table__header
+            Priority
+          %th.govuk-table__header
+            Days
+          %th.govuk-table__header
+            Total
+          %th.govuk-table__header
+            Due
+          %th.govuk-table__header
+            Overdue
+          %th.govuk-table__header
+            Completed on time
+      %tbody.govuk-table__body
+        - @presenter.priorities.each do |priority|
+          %tr.govuk-table__row
+            %td.govuk-table__cell= priority.name
+            %td.govuk-table__cell= priority.days
+            %td.govuk-table__cell= @presenter.priority_completed_on_time_percentage(priority: priority)
+            %td.govuk-table__cell= '-'
+            %td.govuk-table__cell= '-'
+            %td.govuk-table__cell= '-'
