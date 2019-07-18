@@ -1,7 +1,8 @@
 class Staff::PropertyDefectsController < Staff::BaseController
   def new
     @property = Property.find(property_id)
-    @defect = Defect.new
+    defect = Defect.new
+    @defect_form = DefectForm.new(defect: defect)
   end
 
   def create
@@ -54,10 +55,6 @@ class Staff::PropertyDefectsController < Staff::BaseController
     params[:property_id]
   end
 
-  def priority_id
-    params.require(:defect).permit(:priority)[:priority]
-  end
-
   def defect_params
     params.require(:defect).permit(
       :title,
@@ -66,7 +63,8 @@ class Staff::PropertyDefectsController < Staff::BaseController
       :contact_email_address,
       :contact_phone_number,
       :trade,
-      :status
+      :status,
+      :priority
     )
   end
 end

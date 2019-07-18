@@ -33,12 +33,12 @@ RSpec.feature 'Anyone can create a defect for a property' do
     end
 
     within('form.new_defect') do
-      fill_in 'defect[title]', with: 'Electrics failed'
-      fill_in 'defect[description]', with: 'None of the electrics work'
-      fill_in 'defect[contact_name]', with: 'Alex Stone'
-      fill_in 'defect[contact_email_address]', with: 'email@example.com'
-      fill_in 'defect[contact_phone_number]', with: '07123456789'
-      select 'Electrical', from: 'defect[trade]'
+      fill_in 'defect_form[title]', with: 'Electrics failed'
+      fill_in 'defect_form[description]', with: 'None of the electrics work'
+      fill_in 'defect_form[contact_name]', with: 'Alex Stone'
+      fill_in 'defect_form[contact_email_address]', with: 'email@example.com'
+      fill_in 'defect_form[contact_phone_number]', with: '07123456789'
+      select 'Electrical', from: 'defect_form[trade]'
       choose priority.name
       click_on(I18n.t('button.create.property_defect'))
     end
@@ -102,7 +102,7 @@ RSpec.feature 'Anyone can create a defect for a property' do
 
     within('form.new_defect') do
       expected_statues.each do |status|
-        select status.capitalize.tr('_', ' '), from: 'defect[status]'
+        select status.capitalize.tr('_', ' '), from: 'defect_form[status]'
       end
       click_on(I18n.t('button.create.property_defect'))
     end

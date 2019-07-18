@@ -8,7 +8,7 @@ class BuildDefect
     self.defect_params = defect_params
     self.property_id = options[:property_id]
     self.communal_area_id = options[:communal_area_id]
-    self.priority_id = options[:priority_id]
+    self.priority_id = defect_params[:priority_id]
   end
 
   def call

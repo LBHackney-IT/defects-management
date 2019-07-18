@@ -8,7 +8,7 @@
 
     = render partial: '/shared/properties/information', locals: { property: @property }
 
-    = simple_form_for @defect, html: { class: 'new_defect' }, action: :post, url: property_defects_path(@property) do |f|
+    = simple_form_for @defect_form, html: { class: 'new_defect' }, action: :post, url: property_defects_path(@property) do |f|
       .govuk-form-group
         = f.input :title,
                   hint: I18n.t('form.defect.title.description'),
@@ -30,7 +30,7 @@
                   wrapper: 'select',
                   input_html: { class: 'status' },
                   collection: Defect.statuses,
-                  selected: @defect.status,
+                  selected: @defect_form.status,
                   required: true,
                   label_method: ->(obj){ status_form_label(option_array: obj) },
                   value_method: :first
@@ -42,6 +42,6 @@
                   input_html: { class: 'priorities' },
                   collection: @property.scheme.priorities,
                   required: true,
-                  selected: @defect.priority,
+                  selected: @defect_form.priority,
                   label_method: ->(obj){ priority_form_label(priority: obj) }
       = f.button :submit, I18n.t('button.create.property_defect')
